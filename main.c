@@ -32,6 +32,7 @@ int main(int argc, char* argv[])
     {
         fprintf (stderr, "creatematrix_from_file:\nCan't get nonzero count from file\n");
 	free_matrix (matrix);
+	matrix = NULL;
 	return -4;
     }
     int row = get_rows(matrix), col = get_cols(matrix);
@@ -48,6 +49,7 @@ int main(int argc, char* argv[])
             {
                 fprintf (stderr, "creatematrix_from_file:\n\tCan't get %d element from file\n", _non0-nonzero);
 		free_matrix (matrix);
+		matrix = NULL;
 		return -5;
             }
     }
@@ -65,5 +67,6 @@ int main(int argc, char* argv[])
     }
     printf ("euclidean norm of matrix is %lf\n", sqrt(sqrsum));
     free_matrix (matrix);
+    matrix = NULL;
 	return 0;
 }
