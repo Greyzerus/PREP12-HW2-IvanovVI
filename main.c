@@ -31,7 +31,8 @@ int main(int argc, char* argv[])
     if (fscanf(file, "%d", &nonzero) != 1 || nonzero <0)
     {
         fprintf (stderr, "creatematrix_from_file:\nCan't get nonzero count from file\n");
-        return -4;
+	free_matrix (matrix);
+	return -4;
     }
     int row = get_rows(matrix), col = get_cols(matrix);
     int rown, coln;
@@ -46,7 +47,8 @@ int main(int argc, char* argv[])
         else
             {
                 fprintf (stderr, "creatematrix_from_file:\n\tCan't get %d element from file\n", _non0-nonzero);
-                return -5;
+		free_matrix (matrix);
+		return -5;
             }
     }
     if ( fclose (file) == EOF )
