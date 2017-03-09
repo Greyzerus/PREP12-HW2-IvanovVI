@@ -43,6 +43,7 @@ Matrix* create_matrix(int row, int col)
     {
         fprintf (stderr, "create_matrix:\n\tCan't allocate %d bytes of memory\n",
                                             (int) (row * sizeof (double*)));
+        free (matrix);
         return NULL;
     }
     for (int i = row -1 ; i >= 0 ; i--)
@@ -52,6 +53,10 @@ Matrix* create_matrix(int row, int col)
         {
             fprintf (stderr, "create_matrix:\n\tCan't allocate %d bytes of memory\n",
                                             (int) (col * sizeof (double*)));
+            for (int j=row; j>i; j--)
+                free (matrix -> array [j]);
+            free (matrix -> array);
+            free (matrix);
             return NULL;
         }
     }
