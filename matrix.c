@@ -44,6 +44,7 @@ Matrix* create_matrix(int row, int col)
         fprintf (stderr, "create_matrix:\n\tCan't allocate %d bytes of memory\n",
                                             (int) (row * sizeof (double*)));
         free (matrix);
+        matrix = NULL;
         return NULL;
     }
     for (int i = row -1 ; i >= 0 ; i--)
@@ -56,7 +57,9 @@ Matrix* create_matrix(int row, int col)
             for (int j=row - 1; j>i; j--)
                 free (matrix -> array [j]);
             free (matrix -> array);
+            matrix -> array = NULL;
             free (matrix);
+            matrix = NULL;
             return NULL;
         }
     }
@@ -68,7 +71,9 @@ void free_matrix(Matrix* matrix)
     for (int i = matrix -> maxrow -1 ; i >= 0 ; i--)
         free ((matrix -> array)[i]);
     free (matrix -> array);
+    matrix -> array = NULL;
     free (matrix);
+    matrix = NULL;
 }
 
 
